@@ -22,7 +22,7 @@ OBJS = $(SRCS:.c=.o)
 FLAGS = -Wall -Wextra -Werror
 
 %.o : %.c
-	@gcc $(FLAGS) -o $@ -c $<
+	@gcc $(FLAGS) -I $(HEADERS) -o $@ -c $<
 
 all : $(NAME)
 
