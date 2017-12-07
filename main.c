@@ -20,7 +20,9 @@ int main(int argc, char **argv)
     (void)argc;
     (void)argv;
 
-    // s
+    ft_printf("sdfghj%+++- 6.9ld %p %%", 5, 6);
+
+    /*// s
     printf("%%s : %s\n", "Simple string");
 
     // S
@@ -61,6 +63,12 @@ int main(int argc, char **argv)
     printf("%%c : %c\n", 67);
 
     // C
-    printf("%%C : %C\n", 67);
+    printf("%%C : %C\n", 67);*/
+
+  /*  printf("%-d\n", 5);
+    printf("%0d\n", 5);
+    printf("%+d\n", 5);
+    printf("% d\n", 5);*/
+    //printf("%----------------+i\n", 5);
     return (0);
 }
