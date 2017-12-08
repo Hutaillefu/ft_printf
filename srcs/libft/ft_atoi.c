@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   str_manip.c                                      .::    .:/ .      .::   */
+/*   ft_atoi.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/07 15:10:48 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/07 15:10:51 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/30 13:55:32 by htaillef     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/30 13:55:36 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-/*
- ** Remove n char from str.
-*/
-char *resize(char *str, int n)
+int		ft_atoi(const char *str)
 {
-    char *res;
-    if (!str)
-    {
-        printf("Resize 1 error str : %s, n : %i\n", str, n);
-        return (NULL);
-    }
-    if (n == 0)
-        return (str);
-    res = ft_strsub(str, n, ft_strlen(str) - n);
-    if (!res)
-    {
-        printf("Resize 2 error\n");
-        return (NULL);
-    }
-    return (res);
+	int		sign;
+	int		res;
+	int		i;
+
+	i = 0;
+	sign = 1;
+	res = 0;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v' ||
+			str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			sign = -sign;
+		i++;
+	}
+	while (ft_isdigit(str[i]) == 1)
+	{
+		res = res * 10 + str[i] - '0';
+		i++;
+	}
+	return (res * sign);
 }

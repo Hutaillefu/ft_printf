@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   str_manip.c                                      .::    .:/ .      .::   */
+/*   ft_strcpy.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/07 15:10:48 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/07 15:10:51 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/30 14:08:14 by htaillef     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/30 14:08:16 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
-
-/*
- ** Remove n char from str.
-*/
-char *resize(char *str, int n)
+char	*ft_strcpy(char *dst, const char *src)
 {
-    char *res;
-    if (!str)
-    {
-        printf("Resize 1 error str : %s, n : %i\n", str, n);
-        return (NULL);
-    }
-    if (n == 0)
-        return (str);
-    res = ft_strsub(str, n, ft_strlen(str) - n);
-    if (!res)
-    {
-        printf("Resize 2 error\n");
-        return (NULL);
-    }
-    return (res);
+	int i;
+
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   str_manip.c                                      .::    .:/ .      .::   */
+/*   ft_strdup.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/07 15:10:48 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/07 15:10:51 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/30 14:09:24 by htaillef     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/30 14:09:25 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-/*
- ** Remove n char from str.
-*/
-char *resize(char *str, int n)
+char	*ft_strdup(const char *s1)
 {
-    char *res;
-    if (!str)
-    {
-        printf("Resize 1 error str : %s, n : %i\n", str, n);
-        return (NULL);
-    }
-    if (n == 0)
-        return (str);
-    res = ft_strsub(str, n, ft_strlen(str) - n);
-    if (!res)
-    {
-        printf("Resize 2 error\n");
-        return (NULL);
-    }
-    return (res);
+	int		len;
+	char	*dst;
+
+	len = ft_strlen(s1);
+	dst = (char *)malloc(sizeof(char) * len + 1);
+	if (!dst)
+		return (NULL);
+	ft_strcpy(dst, s1);
+	return (dst);
 }

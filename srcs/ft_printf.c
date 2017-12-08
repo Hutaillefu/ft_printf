@@ -23,26 +23,22 @@ void process(char **format, va_list *args)
     i = 0;
     while ((*format)[i])
     {
-        printf("PROCESS : %s\n", *format);
         if ((*format)[i] == '%')
         {
+            display(*format, i); // affiche le text avant le %
             if ((*format)[i + 1] && (*format)[i + 1] == '%')
             {
-                printf("HERE :%s\n", *format);
-                ft_putstr("%%\n");
-                *format = resize(*format, i + 1);
+                *format = resize(*format, i);
+                ft_putchar('%');
+                *format = resize(*format, 2);
                 i = 0;
-                printf("HERE : %s\n", *format);
             }
             else
             {
-                display(*format, i);              // affiche le text avant le %
                 *format = resize(*format, i + 1); // supprime le text et le %
-                printf("After resize : %s\n", *format);
-                infos = extract(format); // extrait les infos du %
-                printf("After extract : %s\n", *format);
+                infos = extract(format);          // extrait les infos du %
                 i = 0;
-                // display_format(infos, args);    // affiche le format
+                display_format(infos, args);       // affiche le format
                 // clear_infos(&infos);            // supprime la structure
             }
             continue;

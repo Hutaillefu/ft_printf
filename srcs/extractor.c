@@ -15,9 +15,10 @@
 #include <stdio.h>
 
 /*
- ** Setup flags of the format.
- ** Resize str.
+ ** Setup flag(s) of the format.
+ ** Resize the string pointed by str if flag(s) found.
 */
+
 static void check_flags(char **str, t_format **format)
 {
     t_bool flag_found;
@@ -43,6 +44,11 @@ static void check_flags(char **str, t_format **format)
         check_flags(str, format);
     }
 }
+
+/*
+ ** Setup the int pointed by val with the number at the begin of str.
+ ** Resize the string pointed by str if a number was found.
+*/
 
 static void check_width(char **str, int *val)
 {
@@ -71,6 +77,11 @@ static void check_width(char **str, int *val)
     *str = resize(*str, i);
 }
 
+/*
+ ** Setup the format's modifier.
+ ** Resize the string pointed by str if a modifier was found.
+*/
+
 static void check_modifier(char **str, t_format **format)
 {
     if (!(*str))
@@ -91,6 +102,11 @@ static void check_modifier(char **str, t_format **format)
         *str = resize(*str, ft_strlen((*format)->modifier));
 }
 
+/*
+ ** Setup the format's period.
+ ** Resize the string pointed by str if a period was found.
+*/
+
 static void check_period(char **str, t_format **format)
 {
     if (!(*str))
@@ -101,6 +117,11 @@ static void check_period(char **str, t_format **format)
         *str = resize(*str, 1);
     }
 }
+
+/*
+ ** Setup the format's type.
+ ** Resize the string pointed by str if a type was found.
+*/
 
 static void check_type(char **str, t_format **format)
 {
@@ -116,6 +137,11 @@ static void check_type(char **str, t_format **format)
     }
 }
 
+/*
+ ** Create a new fresh format based on str information. Resize str.
+ ** Return the format or NUll if error.
+*/
+
 t_format *extract(char **str)
 {
     t_format *format;
@@ -129,11 +155,12 @@ t_format *extract(char **str)
     check_modifier(str, &format);
     check_type(str, &format);
 
+    /*printf("EXTRACTTOR\n");
     printf("Min width : %i\n", format->min_width);
     printf("Perdiod : %i\n", format->period);
     printf("Precision : %i\n", format->precision);
     printf("Modifier : %s\n", format->modifier);
     printf("Type : %c\n", format->type);
-
+    printf("\n\n");*/
     return (format);
 }

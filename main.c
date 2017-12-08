@@ -17,16 +17,17 @@
 
 int main(int argc, char **argv)
 {
-    (void)argc;
-    (void)argv;
+  (void)argc;
+  (void)argv;
 
-    ft_printf("sdfghj%+++- 6.9ld %p %%", 5, 6);
+  ft_printf("sdfghj%d%hi %%\n", 5, 6);
+  // ft_printf("%%", 5, 6);
 
-    /*// s
+  /*// s
     printf("%%s : %s\n", "Simple string");
 
-    // S
-    wchar_t S[] = L"Simple string";
+    //S
+    wchar_t S[] = L"Simple &e éstring";
     printf("%%S : %S\n", S);
 
     // p
@@ -65,10 +66,10 @@ int main(int argc, char **argv)
     // C
     printf("%%C : %C\n", 67);*/
 
-  /*  printf("%-d\n", 5);
-    printf("%0d\n", 5);
-    printf("%+d\n", 5);
-    printf("% d\n", 5);*/
-    //printf("%----------------+i\n", 5);
-    return (0);
+  /* printf("%-5d\n", 5);
+  printf("%05d\n", 5);
+  printf("%+d\n", 5);
+  printf("% d\n", 5);*/
+
+  return (0);
 }

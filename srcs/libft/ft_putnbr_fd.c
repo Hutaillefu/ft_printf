@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   str_manip.c                                      .::    .:/ .      .::   */
+/*   ft_putnbr_fd.c                                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/07 15:10:48 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/07 15:10:51 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/30 14:05:01 by htaillef     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/30 14:05:04 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-/*
- ** Remove n char from str.
-*/
-char *resize(char *str, int n)
+void	ft_putnbr_fd(int n, int fd)
 {
-    char *res;
-    if (!str)
-    {
-        printf("Resize 1 error str : %s, n : %i\n", str, n);
-        return (NULL);
-    }
-    if (n == 0)
-        return (str);
-    res = ft_strsub(str, n, ft_strlen(str) - n);
-    if (!res)
-    {
-        printf("Resize 2 error\n");
-        return (NULL);
-    }
-    return (res);
+	unsigned int n1;
+
+	n1 = n;
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n1 = -n1;
+	}
+	if (n1 < 10)
+		ft_putchar_fd(n1 + '0', fd);
+	else
+	{
+		ft_putnbr_fd(n1 / 10, fd);
+		ft_putnbr_fd(n1 % 10, fd);
+	}
 }

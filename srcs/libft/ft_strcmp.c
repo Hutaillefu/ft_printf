@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   str_manip.c                                      .::    .:/ .      .::   */
+/*   ft_strcmp.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/07 15:10:48 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/07 15:10:51 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/30 14:07:59 by htaillef     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/30 14:08:02 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
-
-/*
- ** Remove n char from str.
-*/
-char *resize(char *str, int n)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-    char *res;
-    if (!str)
-    {
-        printf("Resize 1 error str : %s, n : %i\n", str, n);
-        return (NULL);
-    }
-    if (n == 0)
-        return (str);
-    res = ft_strsub(str, n, ft_strlen(str) - n);
-    if (!res)
-    {
-        printf("Resize 2 error\n");
-        return (NULL);
-    }
-    return (res);
+	int i;
+
+	i = 0;
+	while (s1[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

@@ -58,6 +58,7 @@ int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 char	*ft_strdup(const char *s1);
 char	*ft_strcpy(char *dst, const char *src);
+int		ft_strcmp(const char *s1, const char *s2);
 
 void    display(const char *str, int n);
 
@@ -65,7 +66,7 @@ char    *resize(char *str, int n);
 
 /* Struct */
 t_format            *new_format(void);
-
 t_format *extract(char **str);
 
+void    display_format(t_format *infos, va_list *args);
 #endif

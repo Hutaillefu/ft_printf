@@ -13,27 +13,30 @@
 
 NAME = libftprintf.a
 
-SRCS = 	srcs/ft_printf.c		\
-	   	srcs/ft_putchar_fd.c	\
-		srcs/ft_putchar.c		\
-		srcs/ft_putstr_fd.c		\
-		srcs/ft_putstr.c		\
-		srcs/ft_putnbr_fd.c		\
-		srcs/ft_putnbr.c		\
-		srcs/display.c			\
-		srcs/struct_manager.c	\
-		srcs/str_manip.c		\
-		srcs/ft_strsub.c		\
-		srcs/ft_strlen.c		\
-		srcs/extractor.c		\
-		srcs/ft_isdigit.c		\
-		srcs/ft_atoi.c			\
-		srcs/ft_strdup.c		\
-		srcs/ft_strcpy.c
+LIBFT_SRCS = 	srcs/libft/ft_printf.c		\
+	   			srcs/libft/ft_putchar_fd.c	\
+				srcs/libft/ft_putchar.c		\
+				srcs/libft/ft_putstr_fd.c	\
+				srcs/libft/ft_putstr.c		\
+				srcs/libft/ft_putnbr_fd.c	\
+				srcs/libft/ft_putnbr.c		\
+				srcs/libft/ft_isdigit.c		\
+				srcs/libft/ft_atoi.c		\
+				srcs/libft/ft_strdup.c		\
+				srcs/libft/ft_strcpy.c		\
+				srcs/libft/ft_strsub.c		\
+				srcs/libft/ft_strlen.c		\
+				srcs/libft/ft_strcmp.c
 
+PRINTF_SRCS = 	srcs/display.c				\
+				srcs/struct_manager.c		\
+				srcs/str_manip.c			\
+				srcs/extractor.c			\
+		
 HEADERS = ./includes
 
-OBJS = $(SRCS:.c=.o)
+PRINTF_OBJS = $(PRINTF_SRCS:.c=.o)
+LIBFT_OBJS = $(LIBFT_SRCS:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -42,11 +45,11 @@ FLAGS = -Wall -Wextra -Werror
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
-	@ar -rcs $(NAME) $(OBJS)
+$(NAME) : $(LIBFT_OBJS) $(PRINTF_OBJS)
+	@ar -rcs $(NAME) $(LIBFT_OBJS) $(PRINTF_OBJS)
 
 clean :
-	@rm -rf $(OBJS)
+	@rm -rf $(LIBFT_OBJS) $(PRINTF_OBJS)
 
 fclean : clean
 	@rm -rf $(NAME)
