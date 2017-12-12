@@ -6,15 +6,14 @@
 #    By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/12/05 18:54:15 by htaillef     #+#   ##    ##    #+#        #
-#    Updated: 2017/12/05 18:54:17 by htaillef    ###    #+. /#+    ###.fr      #
+#    Updated: 2017/12/12 16:34:16 by htaillef    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-LIBFT_SRCS = 	srcs/libft/ft_printf.c		\
-	   			srcs/libft/ft_putchar_fd.c	\
+LIBFT_SRCS = 	srcs/libft/ft_putchar_fd.c	\
 				srcs/libft/ft_putchar.c		\
 				srcs/libft/ft_putstr_fd.c	\
 				srcs/libft/ft_putstr.c		\
@@ -26,12 +25,21 @@ LIBFT_SRCS = 	srcs/libft/ft_printf.c		\
 				srcs/libft/ft_strcpy.c		\
 				srcs/libft/ft_strsub.c		\
 				srcs/libft/ft_strlen.c		\
-				srcs/libft/ft_strcmp.c
+				srcs/libft/ft_strcmp.c		\
+				srcs/libft/ft_memalloc.c	\
+				srcs/libft/ft_strjoin.c		\
+				srcs/libft/ft_bzero.c		\
+				srcs/libft/ft_strcat.c		\
+				srcs/libft/ft_strncat.c		\
+				srcs/libft/ft_itoa.c
 
-PRINTF_SRCS = 	srcs/display.c				\
+PRINTF_SRCS = 	srcs/ft_printf.c			\
+				srcs/display.c				\
 				srcs/struct_manager.c		\
 				srcs/str_manip.c			\
 				srcs/extractor.c			\
+				srcs/ft_strnjoin.c			\
+				srcs/ft_itoa_base.c
 		
 HEADERS = ./includes
 

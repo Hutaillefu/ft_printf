@@ -14,50 +14,57 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-void process(char **format, va_list *args)
+char *process(char **format, va_list *args)
 {
-    (void)args;
-    int i;
-    t_format *infos;
+	int 		i;
+	char		*buffer;
+	t_format 	*infos;
 
-    i = 0;
-    while ((*format)[i])
-    {
-        if ((*format)[i] == '%')
-        {
-            display(*format, i); // affiche le text avant le %
-            if ((*format)[i + 1] && (*format)[i + 1] == '%')
-            {
-                *format = resize(*format, i);
-                ft_putchar('%');
-                *format = resize(*format, 2);
-                i = 0;
-            }
-            else
-            {
-                *format = resize(*format, i + 1); // supprime le text et le %
-                infos = extract(format);          // extrait les infos du %
-                i = 0;
-                display_format(infos, args);       // affiche le format
-                // clear_infos(&infos);            // supprime la structure
-            }
-            continue;
-        }
-        i++;
-    }
-    ft_putstr(*format);
+	buffer = ft_strdup("");
+	if (!buffer)
+		return (NULL);
+
+	i = 0;
+	while ((*format)[i])
+	{
+		if ((*format)[i] == '%')
+		{
+			buffer = ft_strnjoin(buffer, *format, i); // affiche le text avant le %
+			if ((*format)[i + 1] && (*format)[i + 1] == '%')
+			{
+				*format = resize(*format, i);
+				buffer = ft_strjoin(buffer, "%");
+				*format = resize(*format, 2);
+				i = 0;
+			}
+			else
+			{
+				*format = resize(*format, i + 1); // supprime le text et le %
+				infos = extract(format);		  // extrait les infos du %
+				i = 0;
+				display_format(infos, args, &buffer); // affiche le format
+				// clear_infos(&infos);            // supprime la structure
+			}
+			continue;
+		}
+		i++;
+	}
+	buffer = ft_strjoin(buffer, *format);
+	return (buffer);
 }
 
 int ft_printf(const char *restrict format, ...)
 {
-    if (!format)
-        return (-1);
+	char *buffer;
+	va_list args;
 
-    va_list args;
-    va_start(args, format);
-
-    process((char **)&format, &args);
-
-    va_end(args);
-    return (0);
+	if (!format)
+		return (-1);
+	va_start(args, format);
+	buffer = process((char **)&format, &args);
+	if (!buffer)
+		return (-1);
+	va_end(args);
+	ft_putstr(buffer);
+	return (ft_strlen(buffer));
 }

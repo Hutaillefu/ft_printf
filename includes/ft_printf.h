@@ -45,7 +45,7 @@ typedef struct  s_format
     char    type;
 }               t_format;
 
-/* Utils  */
+/* LIBFT  */
 void	ft_putchar_fd(char c, int fd);
 void	ft_putchar(char c);
 void	ft_putnbr_fd(int n, int fd);
@@ -59,8 +59,16 @@ int		ft_atoi(const char *str);
 char	*ft_strdup(const char *s1);
 char	*ft_strcpy(char *dst, const char *src);
 int		ft_strcmp(const char *s1, const char *s2);
+void	ft_bzero(void *s, size_t n);
+void	*ft_memalloc(size_t size);
+char	*ft_strcat(char *s1, const char *s2);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strncat(char *dst, const char *src, size_t n);
+char	*ft_itoa(int n);
 
 void    display(const char *str, int n);
+char	*ft_strnjoin(char const *s1, char const *s2, size_t n);
+char	*ft_itoa_base(int n, int base, t_bool capital);
 
 char    *resize(char *str, int n);
 
@@ -68,5 +76,5 @@ char    *resize(char *str, int n);
 t_format            *new_format(void);
 t_format *extract(char **str);
 
-void    display_format(t_format *infos, va_list *args);
+void    display_format(t_format *infos, va_list *args, char **buffer);
 #endif

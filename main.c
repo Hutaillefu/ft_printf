@@ -20,18 +20,19 @@ int main(int argc, char **argv)
   (void)argc;
   (void)argv;
 
-  ft_printf("sdfghj%d%hi %%\n", 5, 6);
+  int chars = ft_printf("sdfghj%d%hi %%%s %x %o\n", 5, 6, "Hello", 15154, 500);
+  printf("%d chars printed\n", chars);
   // ft_printf("%%", 5, 6);
 
-  /*// s
-    printf("%%s : %s\n", "Simple string");
+  // s
+  //  printf("%%s : %s\n", "Simple string");
 
     //S
-    wchar_t S[] = L"Simple &e éstring";
+   /* wchar_t S[] = L"Simple &e éstring";
     printf("%%S : %S\n", S);
 
     // p
-    printf("%%p : %p\n", (void *)2);
+    printf("%%p : %p\n", (void *)180);
 
     // d
     printf("%%d : %d\n", 23);
@@ -43,31 +44,31 @@ int main(int argc, char **argv)
     printf("%%i : %i\n", 23);
 
     // o
-    printf("%%o : %o\n", 23);
+    printf("%%o : %o\n", 102);
 
     // O
-    printf("%%O : %O\n", 23);
+    printf("%%O : %O\n", 102);
 
     // u
-    printf("%%u : %u\n", 23);
+    printf("%%u : %u\n", -23);
 
     // U
     printf("%%U : %U\n", 23);
 
     // x
-    printf("%%x : %x\n", 23);
+    printf("%%x : %0x\n", 256);
 
     // X
-    printf("%%X : %X\n", 23);
+    printf("%%X : %0X\n", 800);
 
     // c
-    printf("%%c : %c\n", 67);
+    printf("%%c : %c\n", 102);
 
     // C
-    printf("%%C : %C\n", 67);*/
+    printf("%%C : %C\n", L'é');*/
 
-  /* printf("%-5d\n", 5);
-  printf("%05d\n", 5);
+   //printf("%-5d\n", 5);
+  /*printf("%05d\n", 5);
   printf("%+d\n", 5);
   printf("% d\n", 5);*/
 
