@@ -1,39 +1,55 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   retrieve_data.c                                  .::    .:/ .      .::   */
+/*   ft_itoa.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/08 15:44:16 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/08 15:44:19 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/30 13:59:57 by htaillef     #+#   ##    ##    #+#       */
+/*   Updated: 2017/11/30 14:00:00 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-short get_short(va_list *args)
+static int ft_nb_digit(long long n)
 {
-	return ((short)va_arg(*args, int));
+	int i;
+
+	i = 1;
+	while (n > 9)
+	{
+		i++;
+		n = n / 10;
+	}
+	return (i);
 }
 
-unsigned short get_unsigned_short(va_list *args)
+static void ft_itoa_rec(char *res, long long n, int *i)
 {
-	return ((unsigned short)va_arg(*args, int));
+	if (n < 10)
+	{
+		res[*i] = n + '0';
+		(*i)++;
+	}
+	else
+	{
+		ft_itoa_rec(res, n / 10, i);
+		ft_itoa_rec(res, n % 10, i);
+	}
 }
 
-int get_int(va_list *args)
+char *ft_itoaull(unsigned long long n)
 {
-	return (va_arg(*args, int));
-}
+	char *res;
+	int i;
 
-int get_unsigned_int(va_list *args)
-{
-	return ((unsigned int)va_arg(*args, int));
-}
+	i = 0;
 
-int get_char(va_list *args)
-{
-	return ((char)va_arg(*args, int));
+	if ((res = (char *)ft_memalloc(sizeof(char) * ft_nb_digit(n) + 1)) == NULL)
+		return (NULL);
+	ft_itoa_rec(res, n, &i);
+	res[i] = '\0';
+	return (res);
 }

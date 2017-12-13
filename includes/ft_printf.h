@@ -64,12 +64,14 @@ void	*ft_memalloc(size_t size);
 char	*ft_strcat(char *s1, const char *s2);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strncat(char *dst, const char *src, size_t n);
-char	*ft_itoa(long long n);
+char	*ft_itoall(long long n);
+char	*ft_itoaull(unsigned long long n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void    display(const char *str, int n);
 char	*ft_strnjoin(char const *s1, char const *s2, size_t n);
-char	*ft_itoa_base(long long n, int base, t_bool capital);
+char	*ft_itoall_base(long long n, int base, t_bool capital);
+char 	*ft_itoaull_base(unsigned long long n, unsigned long long base, t_bool capital);
 
 char    *resize(char *str, int n);
 

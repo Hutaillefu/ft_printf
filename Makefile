@@ -31,7 +31,8 @@ LIBFT_SRCS = 	srcs/libft/ft_putchar_fd.c	\
 				srcs/libft/ft_bzero.c		\
 				srcs/libft/ft_strcat.c		\
 				srcs/libft/ft_strncat.c		\
-				srcs/libft/ft_itoa.c		\
+				srcs/libft/ft_itoall.c		\
+				srcs/libft/ft_itoaull.c		\
 				srcs/libft/ft_strncmp.c
 
 PRINTF_SRCS = 	srcs/ft_printf.c			\
@@ -40,7 +41,8 @@ PRINTF_SRCS = 	srcs/ft_printf.c			\
 				srcs/str_manip.c			\
 				srcs/extractor.c			\
 				srcs/ft_strnjoin.c			\
-				srcs/ft_itoa_base.c
+				srcs/ft_itoall_base.c		\
+				srcs/ft_itoaull_base.c
 		
 HEADERS = ./includes
 

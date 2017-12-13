@@ -12,44 +12,38 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int process(char **format, va_list *args)
 {
 	int i;
 	int chars;
 	t_format *infos;
-
 	chars = 0;
 	i = 0;
-	while ((*format)[i])
+	while (**format)
 	{
-		if ((*format)[i] == '%')
+		if ((**format) == '%')
 		{
-			display(*format, i); // affiche le text avant le %
-			chars += i;
-			if ((*format)[i + 1] && (*format)[i + 1] == '%')
+			(*format)++;
+			if (**format && **format == '%')
 			{
-				*format = resize(*format, i);
+				(*format)++;
 				ft_putchar('%');
 				chars++;
-				*format = resize(*format, 2);
-				i = 0;
 			}
 			else
 			{
-				*format = resize(*format, i + 1); // supprime le text et le %
-				infos = extract(format);		  // extrait les infos du %
-				i = 0;
+				infos = extract(format);			  // extrait les infos du %
 				chars += display_format(infos, args); // affiche le format
-															   // clear_infos(&infos);            // supprime la structure
 			}
-			continue;
 		}
-		i++;
+		else
+		{
+			ft_putchar(**format);
+			(*format)++;
+			chars++;
+		}
 	}
-	ft_putstr(*format);
-	chars += ft_strlen(*format);
 	return (chars);
 }
 

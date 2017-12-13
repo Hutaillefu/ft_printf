@@ -40,7 +40,7 @@ static void check_flags(char **str, t_format **format)
 		flag_found = FALSE;
 	if (flag_found)
 	{
-		*str = resize(*str, 1);
+		(*str)++;
 		check_flags(str, format);
 	}
 }
@@ -100,7 +100,7 @@ static void check_modifier(char **str, t_format **format)
 	else if (*str[0] == 'z')
 		(*format)->modifier = ft_strdup("z");
 	if (((*format)->modifier))
-		*str = resize(*str, ft_strlen((*format)->modifier));
+		*str += ft_strlen((*format)->modifier);
 }
 
 /*
@@ -115,7 +115,7 @@ static void check_period(char **str, t_format **format)
 	if (**str == '.')
 	{
 		(*format)->period = TRUE;
-		*str = resize(*str, 1);
+		(*str)++;
 	}
 }
 
@@ -134,7 +134,7 @@ static void check_type(char **str, t_format **format)
 		**str == 'c' || **str == 'C')
 	{
 		(*format)->type = **str;
-		*str = resize(*str, 1);
+		(*str)++;
 	}
 }
 
