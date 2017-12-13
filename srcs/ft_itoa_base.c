@@ -13,7 +13,7 @@
 
 #include "ft_printf.h"
 
-static int ft_nb_digit(int n)
+static int ft_nb_digit(long long n)
 {
 	int i;
 
@@ -62,7 +62,7 @@ static char ft_lower_char(int n)
 		return n + '0';
 }
 
-static void ft_itoa_rec(char *res, int n, int *i, int base, t_bool capital)
+static void ft_itoa_rec(char *res, long long n, int *i, int base, t_bool capital)
 {
 	if (n < base)
 	{
@@ -79,15 +79,13 @@ static void ft_itoa_rec(char *res, int n, int *i, int base, t_bool capital)
 	}
 }
 
-char *ft_itoa_base(int n, int base, t_bool capital)
+char *ft_itoa_base(long long n, int base, t_bool capital)
 {
 	char *res;
 	int i;
 
 	if (base > 16)
 		return (NULL);
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
 	i = 0;
 	if (n < 0)
 	{

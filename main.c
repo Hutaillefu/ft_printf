@@ -20,8 +20,12 @@ int main(int argc, char **argv)
   (void)argc;
   (void)argv;
 
-  int chars = ft_printf("sdfghj%d%hi %%%s %x %o\n", 5, 6, "Hello", 15154, 500);
+  char a = 'A';
+  int chars = ft_printf("%i, %li, %lli, %zi, %ji, %hi, %hhi\n", 23, 23l, 23ll, 23, 23l, (short)23, a);
   printf("%d chars printed\n", chars);
+
+  int chars1 = printf("%i, %li, %lli, %zi, %ji, %hi, %hhi\n", 23, 23l, 23ll, 23, 23l, (short)23, a);
+  printf("%d chars printed\n", chars1);
   // ft_printf("%%", 5, 6);
 
   // s
@@ -71,6 +75,8 @@ int main(int argc, char **argv)
   /*printf("%05d\n", 5);
   printf("%+d\n", 5);
   printf("% d\n", 5);*/
+
+  //printf("%zi\n", ']');
 
   return (0);
 }

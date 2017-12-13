@@ -31,7 +31,8 @@ LIBFT_SRCS = 	srcs/libft/ft_putchar_fd.c	\
 				srcs/libft/ft_bzero.c		\
 				srcs/libft/ft_strcat.c		\
 				srcs/libft/ft_strncat.c		\
-				srcs/libft/ft_itoa.c
+				srcs/libft/ft_itoa.c		\
+				srcs/libft/ft_strncmp.c
 
 PRINTF_SRCS = 	srcs/ft_printf.c			\
 				srcs/display.c				\
