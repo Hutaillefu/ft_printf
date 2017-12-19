@@ -12,21 +12,23 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-static int		ft_nb_digit(long long n)
+static int ft_nb_digit(long long n)
 {
-	int	i;
+	int i;
 
 	i = 1;
-	while (n > 9)
+	while (n > 9ll)
 	{
 		i++;
-		n = n / 10;
+		n = n / 10ll;
 	}
+	//printf("%lld : %i digit\n", n, i);
 	return (i);
 }
 
-static void		ft_itoa_rec(char *res, long long n, int *i)
+static void ft_itoa_rec(char *res, long long n, int *i)
 {
 	if (n < 10)
 	{
@@ -40,25 +42,25 @@ static void		ft_itoa_rec(char *res, long long n, int *i)
 	}
 }
 
-char			*ft_itoall(long long n)
+char *ft_itoall(long long n)
 {
-	char			*res;
-	int				i;
+	char *res;
+	int i;
 
 	i = 0;
+	if (n + 1 == -9223372036854775807)
+		return (ft_strdup("-9223372036854775808"));
 	if (n < 0)
 	{
 		n = -n;
-		if ((res = (char *)ft_memalloc(sizeof(char)
-						* ft_nb_digit(n) + 2)) == NULL)
+		if ((res = (char *)ft_memalloc(sizeof(char) * ft_nb_digit(n) + 2)) == NULL)
 			return (NULL);
 		res[0] = '-';
 		i++;
 	}
 	else
 	{
-		if ((res = (char *)ft_memalloc(sizeof(char)
-						* ft_nb_digit(n) + 1)) == NULL)
+		if ((res = (char *)ft_memalloc(sizeof(char) * ft_nb_digit(n) + 1)) == NULL)
 			return (NULL);
 	}
 	ft_itoa_rec(res, n, &i);

@@ -12,21 +12,22 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-static int ft_nb_digit(long long n)
+static int ft_nb_digit(unsigned long long n)
 {
 	int i;
 
 	i = 1;
-	while (n > 9)
+	while (n > 9ull)
 	{
 		i++;
-		n = n / 10;
+		n = n / 10ull;
 	}
 	return (i);
 }
 
-static void ft_itoa_rec(char *res, long long n, int *i)
+static void ft_itoa_rec(char *res, unsigned long long n, int *i)
 {
 	if (n < 10)
 	{

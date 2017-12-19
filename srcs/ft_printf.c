@@ -18,6 +18,7 @@ int process(char **format, va_list *args)
 	int i;
 	int chars;
 	t_format *infos;
+
 	chars = 0;
 	i = 0;
 	while (**format)

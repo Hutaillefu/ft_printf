@@ -17,9 +17,11 @@
 /*
  ** Puts on stdout n char from str.
 */
+
 void display(const char *str, int n)
 {
 	int i;
+
 	if (!str || n <= 0)
 		return;
 	i = 0;
@@ -30,226 +32,156 @@ void display(const char *str, int n)
 	}
 }
 
-int display_int_type(t_format *infos, va_list *args)
+char *process_type_with_modifier(t_format *infos, va_list *args)
 {
-	char *res;
-	(void)infos;
-	res = ft_itoall(va_arg(*args, int));
-	ft_putstr(res);
-	return (ft_strlen(res));
-	return (0);
-}
-
-int display_string_type(t_format *infos, va_list *args)
-{
-	char *res;
-	(void)infos;
-
-	res = va_arg(*args, char *);
-	if (!res)
-	{
-		ft_putstr("null");
-		return (4);
-	}
-	ft_putstr(res);
-	return (ft_strlen(res));
-}
-
-int display_base_type(t_format *infos, va_list *args, int base, t_bool capital)
-{
-	char *res;
-	(void)infos;
-
-	res = ft_itoall_base(va_arg(*args, unsigned int), base, capital);
-	ft_putstr(res);
-	return (ft_strlen(res));
-}
-
-int display_base_type_val(t_format *infos, long long val, int base, t_bool capital)
-{
-	char *res;
-	(void)infos;
-
-	res = ft_itoall_base(val, base, capital);
-	ft_putstr(res);
-	return (ft_strlen(res));
-}
-
-int display_uint_type(t_format *infos, va_list *args)
-{
+	void *value;
 	char *res;
 
-	(void)infos;
-	res = ft_itoall(va_arg(*args, unsigned int));
-	ft_putstr(res);
-	return (ft_strlen(res));
-}
-
-int display_ushort_type(t_format *infos, va_list *args)
-{
-	char *res;
-
-	(void)infos;
-	res = ft_itoall((unsigned short)va_arg(*args, unsigned int));
-	ft_putstr(res);
-	return (ft_strlen(res));
-}
-
-int display_ulong_type(t_format *infos, va_list *args)
-{
-	char *res;
-
-	(void)infos;
-	res = ft_itoall(va_arg(*args, unsigned long));
-	ft_putstr(res);
-	return (ft_strlen(res));
-}
-
-int display_ulonglong_type(t_format *infos, va_list *args)
-{
-	char *res;
-
-	(void)infos;
-	res = ft_itoaull(va_arg(*args, unsigned long long));
-	ft_putstr(res);
-	return (ft_strlen(res));
-}
-
-int display_char_type(t_format *infos, va_list *args)
-{
-	char res;
-
-	(void)infos;
-	res = va_arg(*args, int);
-	ft_putchar(res);
-	return (1);
-}
-
-int display_uchar_type(t_format *infos, va_list *args)
-{
-	unsigned char res;
-
-	(void)infos;
-	res = va_arg(*args, int);
-	ft_putchar(res);
-	return (1);
-}
-
-int display_long_type(t_format *infos, va_list *args)
-{
-	char *res;
-	int len;
-	(void)infos;
-
-	res = ft_itoall(va_arg(*args, long));
-	ft_putstr(res);
-	len = ft_strlen(res);
-	free(res);
-	res = NULL;
-	return (len);
-}
-
-int display_longlong_type(t_format *infos, va_list *args)
-{
-	char *res;
-	(void)infos;
-
-	res = ft_itoall(va_arg(*args, long long));
-	ft_putstr(res);
-	return (ft_strlen(res));
-}
-
-int display_sizet_type(t_format *infos, va_list *args)
-{
-	char *res;
-	(void)infos;
-
-	res = ft_itoall(va_arg(*args, size_t));
-	ft_putstr(res);
-	return (ft_strlen(res));
-}
-
-int display_intmaxt_type(t_format *infos, va_list *args)
-{
-	char *res;
-	(void)infos;
-
-	res = ft_itoall(va_arg(*args, intmax_t));
-	ft_putstr(res);
-	return (ft_strlen(res));
-}
-
-int display_uintmaxt_type(t_format *infos, va_list *args)
-{
-	char *res;
-	(void)infos;
-
-	res = ft_itoaull(va_arg(*args, uintmax_t));
-	ft_putstr(res);
-	return (ft_strlen(res));
-}
-
-int display_format(t_format *infos, va_list *args)
-{
-	if (!(infos->type))
-		return 0;
+	value = va_arg(*args, void *);
 
 	if (infos->type == 'i' || infos->type == 'd' || infos->type == 'D')
 	{
 		if (infos->modifier)
 		{
 			if (ft_strcmp(infos->modifier, "l") == 0)
-				return display_long_type(infos, args);
+				return ft_itoall((long)value);
 			if (ft_strcmp(infos->modifier, "ll") == 0)
-				return display_longlong_type(infos, args);
+				return ft_itoall((long long)value);
 			if (ft_strcmp(infos->modifier, "z") == 0)
-				return display_sizet_type(infos, args);
+				return ft_itoaull((size_t)value);
 			if (ft_strcmp(infos->modifier, "j") == 0)
-				return display_intmaxt_type(infos, args);
+				return ft_itoall((intmax_t)value);
+			if (ft_strcmp(infos->modifier, "hh") == 0 && infos->type == 'D')
+				return ft_itoall((long)value);
+			if (ft_strcmp(infos->modifier, "hh") == 0)
+				return ft_itoall((char)value);
 		}
-		return display_int_type(infos, args); // modifier h or hh call int
+		if (infos->type == 'D')
+			return ft_itoall((long)value);
+		return ft_itoall((int)value); // modifier h or hh call int
 	}
-	else if (infos->type == 'u')
+	else if (infos->type == 'u' || infos->type == 'U')
 	{
 		if (infos->modifier)
 		{
 			if (ft_strcmp(infos->modifier, "l") == 0)
-				return display_ulong_type(infos, args);
+				return ft_itoaull((unsigned long)value);
 			if (ft_strcmp(infos->modifier, "ll") == 0)
-				return display_ulonglong_type(infos, args);
+				return ft_itoaull((unsigned long long)value);
 			if (ft_strcmp(infos->modifier, "j") == 0)
-				return display_uintmaxt_type(infos, args);
+				return ft_itoaull((uintmax_t)value);
 			if (ft_strcmp(infos->modifier, "z") == 0)
-				return display_sizet_type(infos, args);
+				return ft_itoaull((size_t)value);
 			if (ft_strcmp(infos->modifier, "h") == 0)
-				return display_ushort_type(infos, args);
+				return ft_itoaull((unsigned short)value);
+			if (ft_strcmp(infos->modifier, "hh") == 0 && infos->type == 'U')
+				return ft_itoaull((unsigned long)value);
+			if (ft_strcmp(infos->modifier, "hh") == 0)
+				return ft_itoaull((unsigned char)value);
 		}
-		return (display_uint_type(infos, args));
+		if (infos->type == 'U')
+			return ft_itoaull((unsigned long)value);
+		return ft_itoaull((unsigned int)value);
 	}
 	else if (infos->type == 's')
-		return display_string_type(infos, args);
+	{
+		res = (char *)value;
+		if (!res)
+			return ft_strdup("(null)");
+		return (res);
+	}
 	else if (infos->type == 'X' || infos->type == 'x')
-		return display_base_type(infos, args, 16, infos->type == 'X');
+	{
+		if (infos->modifier)
+		{
+			if (ft_strcmp(infos->modifier, "l") == 0)
+				return ft_itoaull_base((unsigned long)value, 16, infos->type == 'X');
+			if (ft_strcmp(infos->modifier, "ll") == 0)
+				return ft_itoaull_base((unsigned long long)value, 16, infos->type == 'X');
+			if (ft_strcmp(infos->modifier, "z") == 0)
+				return ft_itoaull_base((size_t)value, 16, infos->type == 'X');
+			if (ft_strcmp(infos->modifier, "h") == 0)
+				return ft_itoall_base((unsigned short)value, 16, infos->type == 'X');
+			if (ft_strcmp(infos->modifier, "h") == 0)
+				return ft_itoaull_base((unsigned long)value, 16, infos->type == 'X');
+			if (ft_strcmp(infos->modifier, "hh") == 0)
+				return ft_itoaull_base((unsigned char)value, 16, infos->type == 'X');
+			if (ft_strcmp(infos->modifier, "j") == 0)
+				return ft_itoaull_base((uintmax_t)value, 16, infos->type == 'X');
+		}
+		return ft_itoaull_base((unsigned int)value, 16, infos->type == 'X');
+	}
 	else if (infos->type == 'o' || infos->type == 'O')
 	{
 		if (infos->modifier)
 		{
 			if (ft_strcmp(infos->modifier, "l") == 0)
-				return display_base_type_val(infos, va_arg(*args, unsigned long), 8, FALSE);
+				return ft_itoaull_base((unsigned long)value, 8, FALSE);
 			if (ft_strcmp(infos->modifier, "ll") == 0)
-				return display_base_type_val(infos, va_arg(*args, unsigned long long), 8, FALSE);
+				return ft_itoaull_base((unsigned long long)value, 8, FALSE);
 			if (ft_strcmp(infos->modifier, "z") == 0)
-				return display_base_type_val(infos, va_arg(*args, size_t), 8, FALSE);
-			if (infos->type == 'O' && ft_strcmp(infos->modifier, "h") == 0)
-				return display_base_type_val(infos, (unsigned short)va_arg(*args, long), 8, FALSE);
+				return ft_itoaull_base((size_t)value, 8, FALSE);
 			if (ft_strcmp(infos->modifier, "h") == 0)
-				return display_base_type_val(infos, va_arg(*args, unsigned long), 8, FALSE);
+				return ft_itoall_base((unsigned short)value, 8, FALSE);
+			if (ft_strcmp(infos->modifier, "h") == 0)
+				return ft_itoaull_base((unsigned long)value, 8, FALSE);
 			if (ft_strcmp(infos->modifier, "j") == 0)
-				return display_base_type_val(infos, va_arg(*args, uintmax_t), 8, FALSE);
+				return ft_itoaull_base((uintmax_t)value, 8, FALSE);
+			if (ft_strcmp(infos->modifier, "hh") == 0 && infos->type == 'O')
+				return ft_itoaull_base((unsigned long)value, 8, FALSE);
+			if (ft_strcmp(infos->modifier, "hh") == 0)
+				return ft_itoaull_base((unsigned char)value, 8, FALSE);
 		}
-		return display_base_type(infos, args, 8, FALSE);
+		if (infos->type == 'O')
+			return ft_itoall_base((long)value, 8, FALSE);
+		return ft_itoall_base((unsigned int)value, 8, FALSE);
 	}
 	else if (infos->type == 'c')
-		return display_char_type(infos, args);
-	return (0);
+	{
+		res = ft_strdup("");
+		res[0] = (unsigned char)value;
+		return (res);
+	}
+	else if (infos->type == 'p')
+		return ft_strjoin("0x", ft_itoall_base((long)value, 16, FALSE));
+	return (NULL);
+}
+
+/*char *process_flags_and_precision(char *res, t_format *format)
+{
+	char *final;
+
+
+}*/
+
+int display_format(t_format *infos, va_list *args)
+{
+	char *res;
+	//char *final;
+	int len;
+
+	if (!(infos->type))
+		return 0;
+
+	res = process_type_with_modifier(infos, args);
+	if (!res)
+		return (0);
+	if (res[0] == 0)
+	{
+		ft_putchar(0);
+		return (1);
+	}
+
+	//final = process_flags_and_precision(res, infos);
+	//if (!final)
+	//	return (0);
+
+	ft_putstr(res);
+	/*len = ft_strlen(final);
+
+	free(res);
+	free(final);*/
+
+	len = ft_strlen(res);
+	return (len);
 }
