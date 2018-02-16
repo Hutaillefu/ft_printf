@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strlen.c                                      .::    .:/ .      .::   */
+/*   ft_memdel.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/30 14:10:52 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/15 15:36:25 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/30 14:03:04 by htaillef     #+#   ##    ##    #+#       */
+/*   Updated: 2018/02/15 12:09:16 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_memdel(void **ap)
 {
-	size_t i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	if (*ap)
+	{
+		free(*ap);
+		*ap = NULL;
+	}
 }

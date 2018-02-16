@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_itoa.c                                        .::    .:/ .      .::   */
+/*   ft_itoaull.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/30 13:59:57 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/30 14:00:00 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/15 12:08:54 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-static int ft_nb_digit(unsigned long long n)
+static int	ft_nb_digit(unsigned long long n)
 {
 	int i;
 
@@ -27,7 +27,7 @@ static int ft_nb_digit(unsigned long long n)
 	return (i);
 }
 
-static void ft_itoa_rec(char *res, unsigned long long n, int *i)
+static void	ft_itoa_rec(char *res, unsigned long long n, int *i)
 {
 	if (n < 10)
 	{
@@ -41,14 +41,14 @@ static void ft_itoa_rec(char *res, unsigned long long n, int *i)
 	}
 }
 
-char *ft_itoaull(unsigned long long n)
+char		*ft_itoaull(unsigned long long n)
 {
-	char *res;
-	int i;
+	char	*res;
+	int		i;
 
 	i = 0;
-
-	if ((res = (char *)ft_memalloc(sizeof(char) * ft_nb_digit(n) + 1)) == NULL)
+	if ((res = (char *)ft_memalloc(sizeof(char) *
+	ft_nb_digit(n) + 1)) == NULL)
 		return (NULL);
 	ft_itoa_rec(res, n, &i);
 	res[i] = '\0';

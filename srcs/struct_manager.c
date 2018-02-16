@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   flags_manager.c                                  .::    .:/ .      .::   */
+/*   struct_manager.c                                 .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/07 14:39:28 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/07 14:39:31 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/15 12:48:07 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@
  ** Return the object or NULL if error.
 */
 
-static t_flags *new_flags(void)
+static		t_flags *new_flags(void)
 {
 	t_flags *flags;
 
@@ -38,10 +38,10 @@ static t_flags *new_flags(void)
  ** Return the object or NULL if error.
 */
 
-t_format *new_format(void)
+t_format	*new_format(void)
 {
-	t_format *format;
-	t_flags *flags;
+	t_format	*format;
+	t_flags		*flags;
 
 	format = (t_format *)malloc(sizeof(t_format));
 	if (!format)
@@ -55,5 +55,19 @@ t_format *new_format(void)
 	format->precision = 0;
 	format->modifier = NULL;
 	format->type = '\0';
+	format->is_numeric = FALSE;
+	format->is_negative = FALSE;
 	return (format);
+}
+
+void		free_format(t_format **format)
+{
+	if (!format)
+		return ;
+	if (*format)
+	{
+		ft_memdel((void **)&((*format)->flags));
+		ft_memdel((void **)&((*format)->modifier));
+		ft_memdel((void **)format);
+	}
 }

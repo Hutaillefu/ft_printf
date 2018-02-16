@@ -3,62 +3,58 @@
 /*                                                              /             */
 /*   ft_printf.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/05 15:58:09 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/05 15:58:14 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/15 12:36:25 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int process(char **format, va_list *args)
+int		process(char **format, va_list *args)
 {
-	int i;
-	int chars;
-	t_format *infos;
+	int			i;
+	int			chars;
+	t_format	*infos;
+	char		*buf;
 
+	buf = ft_strdup("");
 	chars = 0;
 	i = 0;
 	while (**format)
 	{
 		if ((**format) == '%')
 		{
+			ft_putstr(buf);
+			buf = ft_strdup("");
 			(*format)++;
-			if (**format && **format == '%')
-			{
-				(*format)++;
-				ft_putchar('%');
-				chars++;
-			}
-			else
-			{
-				infos = extract(format);			  // extrait les infos du %
-				chars += display_format(infos, args); // affiche le format
-			}
+			infos = extract(format);
+			chars += display_format(infos, args);
+			free_format(&infos);
 		}
 		else
 		{
-			ft_putchar(**format);
-			(*format)++;
+			buf = ft_strnjoin(buf, (*format)++, 1);
 			chars++;
 		}
 	}
+	ft_putstr(buf);
 	return (chars);
 }
 
-int ft_printf(const char *restrict format, ...)
+int		ft_printf(const char *restrict format, ...)
 {
-	int chars;
-	va_list args;
+	int		chars;
+	va_list	args;
 
 	if (!format)
 		return (-1);
 	va_start(args, format);
 	chars = process((char **)&format, &args);
-	if (chars == -1)
-		return (-1);
+	// if (chars == -1)
+	// 	return (-1);
 	va_end(args);
 	return (chars);
 }

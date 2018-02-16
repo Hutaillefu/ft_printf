@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_itoa.c                                        .::    .:/ .      .::   */
+/*   ft_itoaull_base.c                                .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/30 13:59:57 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/30 14:00:00 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/01/31 14:42:25 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,37 +29,37 @@ static int ft_nb_digit(unsigned long long n)
 static char ft_upper_char(int n)
 {
 	if (n == 10)
-		return 'A';
+		return ('A');
 	else if (n == 11)
-		return 'B';
+		return ('B');
 	else if (n == 12)
-		return 'C';
+		return ('C');
 	else if (n == 13)
-		return 'D';
+		return ('D');
 	else if (n == 14)
-		return 'E';
+		return ('E');
 	else if (n == 15)
-		return 'F';
+		return ('F');
 	else
-		return n + '0';
+		return (n + '0');
 }
 
 static char ft_lower_char(int n)
 {
 	if (n == 10)
-		return 'a';
+		return ('a');
 	else if (n == 11)
-		return 'b';
+		return ('b');
 	else if (n == 12)
-		return 'c';
+		return ('c');
 	else if (n == 13)
-		return 'd';
+		return ('d');
 	else if (n == 14)
-		return 'e';
+		return ('e');
 	else if (n == 15)
-		return 'f';
+		return ('f');
 	else
-		return n + '0';
+		return (n + '0');
 }
 
 static void ft_itoa_rec(char *res, unsigned long long n, int *i, unsigned long long base, t_bool capital)

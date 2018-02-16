@@ -3,29 +3,28 @@
 /*                                                              /             */
 /*   extractor.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/07 14:55:36 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/07 14:55:39 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/15 14:02:17 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 /*
  ** Setup flag(s) of the format.
  ** Resize the string pointed by str if flag(s) found.
 */
 
-static void check_flags(char **str, t_format **format)
+static void	check_flags(char **str, t_format **format)
 {
 	t_bool flag_found;
 
 	flag_found = TRUE;
 	if (!str)
-		return;
+		return ;
 	if (**str == '-')
 		(*format)->flags->left_justify = TRUE;
 	else if (**str == '0')
@@ -50,22 +49,22 @@ static void check_flags(char **str, t_format **format)
  ** Resize the string pointed by str if a number was found.
 */
 
-static void check_width(char **str, int *val)
+static void	check_width(char **str, size_t *val)
 {
-	int i;
-	char *res;
-	int y;
+	int		i;
+	char	*res;
+	int		y;
 
 	if (!str)
-		return;
+		return ;
 	i = 0;
 	while ((*str)[i] && ft_isdigit(((*str)[i])))
 		i++;
 	if (i == 0)
-		return;
+		return ;
 	res = (char *)malloc(sizeof(char) * (i + 1));
 	if (!res)
-		return;
+		return ;
 	y = 0;
 	while (y < i)
 	{
@@ -74,7 +73,8 @@ static void check_width(char **str, int *val)
 	}
 	res[y] = '\0';
 	*val = ft_atoi(res);
-	*str = resize(*str, i);
+	ft_memdel((void**)&res);
+	*str += i;
 }
 
 /*
@@ -82,11 +82,10 @@ static void check_width(char **str, int *val)
  ** Resize the string pointed by str if a modifier was found.
 */
 
-static void check_modifier(char **str, t_format **format)
+static void	check_modifier(char **str, t_format **format)
 {
 	if (!(*str))
-		return;
-
+		return ;
 	if (ft_strlen(*str) >= 2 && (*str)[0] == 'h' && (*str)[1] == 'h')
 		(*format)->modifier = ft_strdup("hh");
 	else if (ft_strlen(*str) >= 2 && (*str)[0] == 'l' && (*str)[1] == 'l')
@@ -108,10 +107,10 @@ static void check_modifier(char **str, t_format **format)
  ** Resize the string pointed by str if a period was found.
 */
 
-static void check_period(char **str, t_format **format)
+static void	check_period(char **str, t_format **format)
 {
 	if (!(*str))
-		return;
+		return ;
 	if (**str == '.')
 	{
 		(*format)->period = TRUE;
@@ -124,14 +123,20 @@ static void check_period(char **str, t_format **format)
  ** Resize the string pointed by str if a type was found.
 */
 
-static void check_type(char **str, t_format **format)
+static void	check_type(char **str, t_format **format)
 {
 	if (!(*str))
-		return;
-	if (**str == 's' || **str == 'S' || **str == 'p' || **str == 'd' ||
-		**str == 'D' || **str == 'i' || **str == 'o' || **str == 'O' ||
-		**str == 'u' || **str == 'U' || **str == 'x' || **str == 'X' ||
-		**str == 'c' || **str == 'C')
+		return ;
+	if (**str == 'd' || **str == 'D' || **str == 'i' || **str == 'o' ||
+		**str == 'O' || **str == 'u' || **str == 'U' || **str == 'x' ||
+		**str == 'X' || **str == 'p')
+	{
+		(*format)->type = **str;
+		(*format)->is_numeric = TRUE;
+		(*str)++;
+	}
+	else if (**str == 's' || **str == 'S' ||
+		**str == 'c' || **str == 'C' || **str == '%')
 	{
 		(*format)->type = **str;
 		(*str)++;
@@ -143,7 +148,7 @@ static void check_type(char **str, t_format **format)
  ** Return the format or NUll if error.
 */
 
-t_format *extract(char **str)
+t_format	*extract(char **str)
 {
 	t_format *format;
 
@@ -155,13 +160,5 @@ t_format *extract(char **str)
 	check_width(str, &((format)->precision));
 	check_modifier(str, &format);
 	check_type(str, &format);
-
-	/*printf("EXTRACTTOR\n");
-	printf("Min width : %i\n", format->min_width);
-	printf("Perdiod : %i\n", format->period);
-	printf("Precision : %i\n", format->precision);
-	printf("Modifier : %s\n", format->modifier);
-	printf("Type : %c\n", format->type);
-	printf("\n\n");*/
 	return (format);
 }

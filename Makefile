@@ -3,10 +3,10 @@
 #                                                               /              #
 #    Makefile                                         .::    .:/ .      .::    #
 #                                                  +:+:+   +:    +:  +:+:+     #
-#    By: htaillef <marvin@le-101.fr>                +:+   +:    +:    +:+      #
+#    By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/12/05 18:54:15 by htaillef     #+#   ##    ##    #+#        #
-#    Updated: 2017/12/12 16:34:16 by htaillef    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/02/15 17:49:31 by htaillef    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -33,16 +33,18 @@ LIBFT_SRCS = 	srcs/libft/ft_putchar_fd.c	\
 				srcs/libft/ft_strncat.c		\
 				srcs/libft/ft_itoall.c		\
 				srcs/libft/ft_itoaull.c		\
-				srcs/libft/ft_strncmp.c
+				srcs/libft/ft_strncmp.c		\
+				srcs/libft/ft_strncpy.c		\
+				srcs/libft/ft_memdel.c
 
 PRINTF_SRCS = 	srcs/ft_printf.c			\
 				srcs/display.c				\
 				srcs/struct_manager.c		\
-				srcs/str_manip.c			\
 				srcs/extractor.c			\
 				srcs/ft_strnjoin.c			\
 				srcs/ft_itoall_base.c		\
-				srcs/ft_itoaull_base.c
+				srcs/ft_itoaull_base.c		\
+				srcs/unicode.c
 		
 HEADERS = ./includes
 
