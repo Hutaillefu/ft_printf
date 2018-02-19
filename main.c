@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/05 16:12:50 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/16 13:56:57 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/19 13:45:15 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,10 +26,47 @@ int main(int argc, char **argv)
 
 	//unsigned char a = '3';
 
-	int len = ft_printf("%ls, %ls\n", L"ÊM-^ZM-^VÁM-^BM-^I", L"ŸM-^Dÿ≠ŸM-^E ÿÆŸM-^Fÿ≤ŸM-ÿ±");
+	/*int len = ft_printf("{%03c}\n", 0);
 	printf("%d chars printed\n", len);
-	int len1 = printf("%ls, %ls\n", L"ÊM-^ZM-^VÁM-^BM-^I", L"ŸM-^Dÿ≠ŸM-^E ÿÆŸM-^Fÿ≤ŸM-ÿ±");
-	printf("%d chars printed\n", len1);
+	int len1 = printf("{%03c}\n", 0);
+	printf("%d chars printed\n", len1);*/
+
+	int len2 = ft_printf("%.4S\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
+	printf("%d chars printed\n", len2);
+	int len3 = printf("%.4S\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
+	printf("%d chars printed\n", len3);
+
+  /*ft_printf("\n");
+  ft_printf("%%\n");
+  ft_printf("%d\n", 42);
+  ft_printf("%d%d\n", 42, 41);
+  ft_printf("%d%d%d\n", 42, 43, 44);
+  ft_printf("%ld\n", 2147483647);
+  ft_printf("%lld\n", 9223372036854775807);
+  ft_printf("%x\n", 505);
+  ft_printf("%X\n", 505);
+  ft_printf("%p\n", &ft_printf);
+  ft_printf("%20.15d\n", 54321);
+  ft_printf("%-10d\n", 3);
+  ft_printf("% d\n", 3);
+  ft_printf("%+d\n", 3);
+  ft_printf("%010d\n", 1);
+  ft_printf("%hhd\n", 0);
+  ft_printf("%jd\n", 9223372036854775807);
+  ft_printf("%zd\n", 4294967295);
+  ft_printf("%\n");
+  ft_printf("%U\n", 4294967295);
+  ft_printf("%u\n", 4294967295);
+  ft_printf("%o\n", 40);
+  ft_printf("%%#08x\n", 42);
+  ft_printf("%x\n", 1000);
+  ft_printf("%#X\n", 1000);
+  ft_printf("%s\n", NULL);
+  ft_printf("%S\n", L"ݗݜशব");
+  ft_printf("%s%s\n", "test", "test");
+  ft_printf("%s%s%s\n", "test", "test", "test");
+  ft_printf("%C\n", 15000);*/
+
 
 	/*ft_printf("%-15.5d\n", 123456789);
 	printf("%-15.5d\n", 123456789);*/

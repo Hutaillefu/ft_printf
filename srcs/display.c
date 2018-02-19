@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/06 19:35:21 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/16 13:56:34 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/19 13:35:17 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,24 +40,24 @@ static char *process_int(t_format *infos, void *value)
 	{
 		if (ft_strcmp(infos->modifier, "l") == 0)
 			return ft_itoall(type.t_long);
-		if (ft_strcmp(infos->modifier, "ll") == 0)
+		else if (ft_strcmp(infos->modifier, "ll") == 0)
 			return ft_itoall(type.t_long_long);
-		if (ft_strcmp(infos->modifier, "z") == 0)
+		else if (ft_strcmp(infos->modifier, "z") == 0)
 			return ft_itoall((ssize_t)value);
-		if (ft_strcmp(infos->modifier, "j") == 0)
+		else if (ft_strcmp(infos->modifier, "j") == 0)
 			return ft_itoall(type.t_intmax_t);
-		if (ft_strcmp(infos->modifier, "hh") == 0 && infos->type == 'D')
+		else if (ft_strcmp(infos->modifier, "hh") == 0 && infos->type == 'D')
 			return ft_itoall(type.t_long);
-		if (ft_strcmp(infos->modifier, "hh") == 0)
+		else if (ft_strcmp(infos->modifier, "hh") == 0)
 			return ft_itoall((type.t_char));
-				if (ft_strcmp(infos->modifier, "h") == 0 && infos->type == 'D')
+		else if (ft_strcmp(infos->modifier, "h") == 0 && infos->type == 'D')
 			return ft_itoall(type.t_long);
-		if (ft_strcmp(infos->modifier, "h") == 0)
+		else if (ft_strcmp(infos->modifier, "h") == 0)
 			return ft_itoall((type.t_short));
 	}
 	if (infos->type == 'D')
 		return ft_itoall(type.t_long);
-	return ft_itoall(type.t_int);
+	else return ft_itoall(type.t_int);
 }
 
 static char *process_uint(t_format *infos, void *value)
@@ -161,7 +161,8 @@ static char *process_char(void *value)
 
 static char *process_wchar_real(wchar_t c)
 {
-	char*res;
+	char *res;
+
 	if (c == 0)
 		res = ft_strdup("^@");
 	else 
@@ -181,14 +182,20 @@ static char *process_wstr(void * value)
 {
 	wchar_t *wstr;
 	char	*res;
+	char	*ret;
+	char	*wchar;
 
-	res = ft_strdup("");
 	wstr = (wchar_t *)value;
 	if (!wstr)
 		return (ft_strdup("(null)"));
+	res = ft_strdup("");
 	while (*wstr)
 	{
-		res = ft_strjoin(res, process_wchar_real(*wstr));
+		ret = res;
+		wchar = process_wchar_real(*wstr);
+		res = ft_strjoin(res, wchar);
+		ft_memdel((void **)&ret);
+		ft_memdel((void **)&wchar);
 		wstr++;
 	}
 	return (res);
@@ -220,7 +227,7 @@ char *process_type_with_modifier(t_format *infos, va_list *args)
 		return (process_char(value));
 	if (infos->type == 'p')
 		return ft_itoall_base((long)value, 16, FALSE);
-	return (NULL);
+	return (ft_strdup(""));
 }
 
 char *ft_init(size_t len, char c)
@@ -282,13 +289,12 @@ void process_add_buffer(char **add, t_format *format, char *res)
 				*add = ft_strdup("0x");
 			if (format->type == 'X')
 				*add = ft_strdup("0X");
-
 			if (format->type == 'o' || format->type == 'O')
 				*add = ft_strdup("0");
 			}	
 	}
-			if (format->type == 'p')
-				*add = ft_strdup("0x");
+	if (format->type == 'p')
+		*add = ft_strdup("0x");
 }
 
 /*
@@ -326,21 +332,35 @@ t_bool process_final(char **final, char *res, t_format *format, char *add)
 	int addlen;
 	size_t reslen;
 	
+	if (format->flags->padding && !format->flags->left_justify && format->period && format->precision == 0)
+	 {
+		 if (format->type == 'c' && ft_strcmp(res, "^@") == 0)
+			 *final = ft_init(format->min_width + 1, '0');
+		else 
+			 *final = ft_init(format->min_width, '0');						
+ 		return FALSE;
+	 }
+
 	reslen = format->type == 'c' ? 1 : ft_strlen(res);
 	addlen = add != NULL ? ft_strlen(add) : 0;
 	if (reslen + addlen < format->min_width)
 	{
-		if (format->flags->padding && format->is_numeric && !format->flags->left_justify && format->precision == 0) // '0'
-			*final = ft_init(format->min_width, '0');
-		else if (format->type == 'c' && ft_strcmp(res, "^@") == 0)
+		if (format->type == 'c' && ft_strcmp(res, "^@") == 0)
 		{
 			if (format->flags->padding)
-			*final = ft_init(format->min_width + 1, '0');
+				*final = ft_init(format->min_width + 1, '0');
 			else
-			*final = ft_init(format->min_width + 1, ' ');	
+				*final = ft_init(format->min_width + 1, ' ');	
 		}
+		else if (format->flags->padding && !format->flags->left_justify && format->precision == 0) // '0'
+			*final = ft_init(format->min_width, '0');
 		else
-			*final = ft_init(format->min_width, ' ');
+		{
+			if (!format->type)
+				*final = ft_init(ft_strlen(res) > 0 ? format->min_width : format->min_width - 1, ' ');
+			else
+				*final = ft_init(format->min_width, ' ');
+		}
 		return (FALSE);
 	}
 	else
@@ -348,7 +368,7 @@ t_bool process_final(char **final, char *res, t_format *format, char *add)
 		if (add)
 			*final = ft_strjoin(add, res);
 		else
-			*final = res;
+			*final = ft_strdup(res);
 		return (TRUE);
 	}
 }
@@ -361,16 +381,20 @@ t_bool process_final(char **final, char *res, t_format *format, char *add)
 void process_justify(char **final, t_format *format, char *add, char *res)
 {
 	int addlen;
+	int reslen;
 
+	/*if (format->type == 'c' || format->type == 'C')
+		reslen = ft_strcmp(res, "^@") == 0 ? 1 : ft_strlen(res);
+	else */
+		reslen = ft_strlen(res);
 	if (format->period && format->precision == 0 && format->type == 's')
 		return;
-
 	addlen = add != NULL ? ft_strlen(add) : 0;
 	if (format->flags->padding && !(format->flags->left_justify) && format->precision == 0)
 	{
 		if (add)
 			ft_write(final, add, 0);
-		ft_write(final, res, ft_strlen(*final) - ft_strlen(res));
+		ft_write(final, res, ft_strlen(*final) - reslen);
 	}
 	else if (format->flags->padding && !(format->flags->left_justify) && format->precision > 0)
 	{
@@ -378,15 +402,15 @@ void process_justify(char **final, t_format *format, char *add, char *res)
 			ft_write(final, add, ft_strlen(*final) - format->precision - ft_strlen(add));
 		ft_write(final, res, ft_strlen(*final) - ft_strlen(res));
 	}
-	else if (format->flags->left_justify) // '-'
+	else if (format->flags->left_justify)
 	{
 		if (add)
 			ft_write(final, add, 0);
 		ft_write(final, res, addlen);
 	}
 	else if (!(format->flags->left_justify) && !(format->flags->padding))
-	{
-		if (add)
+	{	
+		if (add)	
 			ft_write(final, add, ft_strlen(*final) - ft_strlen(res) - ft_strlen(add));
 		ft_write(final, res, ft_strlen(*final) - ft_strlen(res));
 	}
@@ -404,15 +428,42 @@ char *process_flags_and_precision(char *res, t_format *format)
 	if (format->period && format->precision == 0 && ft_strcmp(res, "0") == 0){
 		if (format->flags->diese && (format->type == 'o' || format->type == 'O'))
 		{}
-			else
+		else
+		{
 		res = ft_strdup("");
+		}
 	}
 	addlen = add != NULL ? ft_strlen(add) : 0;
 	process_precision(&res, format);
 	if (process_final(&final, res, format, add))
+	{
+		ft_memdel((void **)&add);
+		ft_memdel((void**)&res);
 		return (final);
+	}
+	//printf("%s\n", final);
 	process_justify(&final, format, add, res);
+	ft_memdel((void **)&add);
+	ft_memdel((void **)&res);
 	return (final);
+}
+
+void	customput(char *final)
+{
+	int i = 0;
+	char c = 0;
+
+	while (final[i])
+	{
+		if (final[i] == '^' && final[i + 1] && final[i + 1] == '@')
+		{
+			write(1, &c, 1);
+			i++;
+		}
+		else
+			ft_putchar(final[i]);
+		i++;
+	}
 }
 
 int display_format(t_format *infos, va_list *args)
@@ -420,23 +471,30 @@ int display_format(t_format *infos, va_list *args)
 	char *res;
 	char *final;
 	int len;
+	t_bool isnull;
 
-	if (!(infos->type) || !(res = process_type_with_modifier(infos, args)))
-		return (0);
-	if (ft_strcmp(res, "^@") == 0 && infos->type == 'c' && infos->min_width < 2)
+	res = process_type_with_modifier(infos, args);
+		//return (0);
+	isnull = ft_strcmp(res, "^@") == 0;
+	if (isnull && infos->type == 'c' && infos->min_width < 2)
 	{
+		ft_memdel((void **)&res);
 		ft_putchar(0);
 		return (1);
 	}
-	if (res[0] == '-')
+	if (res[0] == '-' && infos->is_numeric)
 	{
 		res = ft_strsub(res, 1, ft_strlen(res) - 1);
 		infos->is_negative = TRUE;
 	}
 	if (!(final = process_flags_and_precision(res, infos)))
 		return (0);
-	ft_putstr(final);
+
+		if (isnull)
+			customput(final);
+		else
+			ft_putstr(final);
 	len = ft_strlen(final);
 	ft_memdel((void **)&final);
-	return (ft_strcmp(res, "^@") == 0 ? len - 1 : len);
+	return (isnull ? len - 1 : len);
 }

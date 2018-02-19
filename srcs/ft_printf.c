@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/05 15:58:09 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/15 12:36:25 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/16 15:33:39 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,6 +28,7 @@ int		process(char **format, va_list *args)
 		if ((**format) == '%')
 		{
 			ft_putstr(buf);
+			ft_memdel((void **)&buf);
 			buf = ft_strdup("");
 			(*format)++;
 			infos = extract(format);
@@ -41,6 +42,7 @@ int		process(char **format, va_list *args)
 		}
 	}
 	ft_putstr(buf);
+	ft_memdel((void **)&buf);
 	return (chars);
 }
 
@@ -53,8 +55,6 @@ int		ft_printf(const char *restrict format, ...)
 		return (-1);
 	va_start(args, format);
 	chars = process((char **)&format, &args);
-	// if (chars == -1)
-	// 	return (-1);
 	va_end(args);
 	return (chars);
 }
