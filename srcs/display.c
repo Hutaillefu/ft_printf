@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/06 19:35:21 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/19 13:35:17 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/19 14:02:46 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -148,13 +148,14 @@ static char *process_octal(t_format *infos, void *value)
 static char *process_char(void *value)
 {
 	char *res;
-
+	
 	if ((unsigned char)value == 0)
 		res = ft_strdup("^@");
 	else
 	{
-		res = ft_strdup("");
+		res = ft_memalloc(2);
 		res[0] = (unsigned char)value;
+		res[1] = '\0';
 	}
 	return (res);
 }
@@ -474,7 +475,6 @@ int display_format(t_format *infos, va_list *args)
 	t_bool isnull;
 
 	res = process_type_with_modifier(infos, args);
-		//return (0);
 	isnull = ft_strcmp(res, "^@") == 0;
 	if (isnull && infos->type == 'c' && infos->min_width < 2)
 	{
