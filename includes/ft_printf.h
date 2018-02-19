@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/05 16:01:43 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/15 18:14:15 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/19 15:29:18 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -83,7 +83,6 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strncpy(char *dst, const char *src, size_t len);
 void			ft_memdel(void **ap);
 
-void    		display(const char *str, int n);
 char			*ft_strnjoin(char *s1, char const *s2, size_t n);
 char			*ft_itoall_base(long long n, int base, t_bool capital);
 char 			*ft_itoaull_base(unsigned long long n, unsigned long long base, t_bool capital);
@@ -95,5 +94,21 @@ void			free_format(t_format **format);
 int				display_format(t_format *infos, va_list *args);
 
 int				wcharlen(wchar_t wchar);
-char            *wchartostr(wchar_t wchar);
+char          	*wchartostr(wchar_t wchar);
+
+char			*process_int(t_format *infos, void *value);
+char			*process_uint(t_format *infos, void *value);
+char   			*process_hexa(t_format *infos, void *value);
+char			*process_octal(t_format *infos, void *value);
+
+char			*process_string(void *value);
+char    		*process_char(void *value);
+char			*process_wchar(void *value);
+char			*process_wstr(void * value);
+
+char			*ft_init(size_t len, char c);
+void			ft_write(char **src, char *new, size_t start_index);
+void			customput(char *final);
+
+
 #endif

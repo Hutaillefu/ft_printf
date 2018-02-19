@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/05 15:58:09 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/16 15:33:39 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/19 18:54:44 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,7 @@ int		process(char **format, va_list *args)
 	int			chars;
 	t_format	*infos;
 	char		*buf;
+	int res;
 
 	buf = ft_strdup("");
 	chars = 0;
@@ -32,7 +33,10 @@ int		process(char **format, va_list *args)
 			buf = ft_strdup("");
 			(*format)++;
 			infos = extract(format);
-			chars += display_format(infos, args);
+			res = display_format(infos, args);
+			if (res == -1)
+				return (res);
+			chars += res;
 			free_format(&infos);
 		}
 		else

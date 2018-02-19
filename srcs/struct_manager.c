@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/07 14:39:28 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/15 12:48:07 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/19 15:54:37 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@
  ** Return the object or NULL if error.
 */
 
-static		t_flags *new_flags(void)
+static t_flags	*new_flags(void)
 {
 	t_flags *flags;
 
@@ -38,7 +38,7 @@ static		t_flags *new_flags(void)
  ** Return the object or NULL if error.
 */
 
-t_format	*new_format(void)
+t_format		*new_format(void)
 {
 	t_format	*format;
 	t_flags		*flags;
@@ -60,7 +60,7 @@ t_format	*new_format(void)
 	return (format);
 }
 
-void		free_format(t_format **format)
+void			free_format(t_format **format)
 {
 	if (!format)
 		return ;

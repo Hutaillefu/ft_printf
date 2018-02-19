@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/05 16:12:50 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/19 14:07:32 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/19 19:04:36 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,15 +26,21 @@ int main(int argc, char **argv)
 
 	//unsigned char a = '3';
 
-	/*int len = ft_printf("{%03c}\n", 0);
-	printf("%d chars printed\n", len);
-	int len1 = printf("{%03c}\n", 0);
-	printf("%d chars printed\n", len1);*/
+	// int len = ft_printf("%#.4o\n", 12);
+	// printf("%d chars printed\n", len);
+	// int len1 = printf("%#.4o\n", 12);
+	// printf("%d chars printed\n", len1);
 
-	int len2 = ft_printf("%-15c\n", 'a');
+
+	int len = ft_printf("%C\n", 0xbffe);
+	printf("%d chars printed\n", len);
+	int len1 = printf("%C\n", 0xbffe);
+	printf("%d chars printed\n", len1);
+
+	/*int len2 = ft_printf("%0#10.0x %0#x\n", 12345, 0);
 	printf("%d chars printed\n", len2);
-	int len3 = printf("%-15c\n", 'a');
-	printf("%d chars printed\n", len3);
+	int len3 = printf("%0#10.0x %0#x\n", 12345, 0);
+	printf("%d chars printed\n", len3);*/
 
   /*ft_printf("\n");
   ft_printf("%%\n");

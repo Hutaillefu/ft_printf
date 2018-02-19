@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/30 13:59:57 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/15 16:10:02 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/19 16:44:39 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -78,7 +78,7 @@ static void	ft_itoa_rec(char *res, long long n, int *i, int base, t_bool capital
 		ft_itoa_rec(res, n % base, i, base, capital);
 	}
 }
-#include <stdio.h>
+
 char	*ft_itoall_base(long long n, int base, t_bool capital)
 {
 	char	*res;
