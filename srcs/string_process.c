@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/06 19:35:21 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/19 15:32:07 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 16:52:47 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,6 +55,8 @@ char		*process_wchar(void *value)
 	wchar_t	c;
 
 	c = (wchar_t)value;
+	if (c >= 0 && c <= 255)
+		return process_char(value);
 	return (process_wchar_real(c));
 }
 
