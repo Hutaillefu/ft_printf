@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/05 16:01:43 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 15:52:17 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 16:59:09 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -116,5 +116,10 @@ void			check_width(char **str, size_t *val);
 void			check_modifier(char **str, t_format **format);
 void			check_period(char **str, t_format **format);
 void			check_type(char **str, t_format **format);
+
+char	*process_type_with_modifier(t_format *infos, va_list *args);
+void	process_add_buffer(char **add, t_format *format, char *res);
+void	process_precision(char **res, t_format *format);
+t_bool	process_final(char **final, char *res,	t_format *format, char *add);
 
 #endif

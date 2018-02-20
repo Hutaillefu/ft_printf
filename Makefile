@@ -6,7 +6,7 @@
 #    By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/12/05 18:54:15 by htaillef     #+#   ##    ##    #+#        #
-#    Updated: 2018/02/19 15:28:05 by htaillef    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/02/20 16:55:52 by htaillef    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -39,6 +39,7 @@ LIBFT_SRCS = 	srcs/libft/ft_putchar_fd.c	\
 
 PRINTF_SRCS = 	srcs/ft_printf.c			\
 				srcs/display.c				\
+				srcs/display1.c				\
 				srcs/struct_manager.c		\
 				srcs/extractor.c			\
 				srcs/ft_strnjoin.c			\
