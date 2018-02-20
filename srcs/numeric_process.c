@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/06 19:35:21 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/19 15:44:50 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 17:23:48 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,7 +68,7 @@ char	*process_uint(t_format *infos, void *value)
 
 char	*process_hexa(t_format *infos, void *value)
 {
-	t_bool maj;
+	enum e_bool maj;
 
 	maj = infos->type == 'X';
 	if (infos->modifier)

@@ -6,14 +6,14 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/06 19:35:21 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 17:01:12 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 17:19:35 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*process_type_with_modifier(t_format *infos, va_list *args)
+char		*process_type_with_modifier(t_format *infos, va_list *args)
 {
 	if (infos->type == '%')
 		return (ft_strdup("%"));
@@ -44,7 +44,7 @@ char	*process_type_with_modifier(t_format *infos, va_list *args)
  ** Put in add buffer string according to format flags.
 */
 
-void	process_add_buffer(char **add, t_format *format, char *res)
+void		process_add_buffer(char **add, t_format *format, char *res)
 {
 	if (format->flags->blank && !(format->flags->positive) &&
 		format->is_numeric && !(format->is_negative) &&
@@ -75,7 +75,7 @@ void	process_add_buffer(char **add, t_format *format, char *res)
  ** Makes res buffer bigger or smaller according to format precision.
 */
 
-void	process_precision(char **res, t_format *format)
+void		process_precision(char **res, t_format *format)
 {
 	char *res1;
 	char *ret;
@@ -98,7 +98,8 @@ void	process_precision(char **res, t_format *format)
 	}
 }
 
-t_bool	process_final1(int addlen, char *res, t_format *format, char **final)
+enum e_bool	process_final1(int addlen, char *res, t_format *format,
+	char **final)
 {
 	if ((format->type == 'c' ? 1 : ft_strlen(res)) + addlen < format->min_width)
 	{
@@ -130,7 +131,7 @@ t_bool	process_final1(int addlen, char *res, t_format *format, char **final)
  ** to format flags padding and width
 */
 
-t_bool	process_final(char **final, char *res,
+enum e_bool	process_final(char **final, char *res,
 	t_format *format, char *add)
 {
 	int		addlen;

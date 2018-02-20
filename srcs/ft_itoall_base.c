@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/30 13:59:57 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 15:16:12 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 17:22:53 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,7 +64,7 @@ static char	ft_lower_char(int n)
 
 static void	ft_itoa_rec(char *res, long long n, int *i, int base)
 {
-	t_bool capital;
+	enum e_bool capital;
 
 	if (base > 0)
 		capital = TRUE;
@@ -88,7 +88,7 @@ static void	ft_itoa_rec(char *res, long long n, int *i, int base)
 	}
 }
 
-char		*ft_itoall_base(long long n, int base, t_bool capital)
+char		*ft_itoall_base(long long n, int base, enum e_bool capital)
 {
 	char	*res;
 	int		i;

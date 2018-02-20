@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/06 19:35:21 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 16:56:50 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 17:18:43 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,10 +77,10 @@ char	*process_flags_and_precision(char *res, t_format *format)
 
 int		display_format(t_format *infos, va_list *args)
 {
-	char	*res;
-	char	*final;
-	int		len;
-	t_bool	isnull;
+	char		*res;
+	char		*final;
+	int			len;
+	enum e_bool	isnull;
 
 	if (!(res = process_type_with_modifier(infos, args)))
 		return (-1);

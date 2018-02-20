@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/07 14:55:36 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 15:52:29 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 17:22:19 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@
 
 void	check_flags(char **str, t_format **format)
 {
-	t_bool flag_found;
+	enum e_bool flag_found;
 
 	flag_found = TRUE;
 	if (!str)
