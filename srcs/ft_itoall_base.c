@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/30 13:59:57 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/19 16:44:39 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 15:16:12 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,8 +62,17 @@ static char	ft_lower_char(int n)
 		return (n + '0');
 }
 
-static void	ft_itoa_rec(char *res, long long n, int *i, int base, t_bool capital)
+static void	ft_itoa_rec(char *res, long long n, int *i, int base)
 {
+	t_bool capital;
+
+	if (base > 0)
+		capital = TRUE;
+	else
+	{
+		capital = FALSE;
+		base = -base;
+	}
 	if (n < base)
 	{
 		if (capital == TRUE)
@@ -74,12 +83,12 @@ static void	ft_itoa_rec(char *res, long long n, int *i, int base, t_bool capital
 	}
 	else
 	{
-		ft_itoa_rec(res, n / base, i, base, capital);
-		ft_itoa_rec(res, n % base, i, base, capital);
+		ft_itoa_rec(res, n / base, i, capital ? base : -base);
+		ft_itoa_rec(res, n % base, i, capital ? base : -base);
 	}
 }
 
-char	*ft_itoall_base(long long n, int base, t_bool capital)
+char		*ft_itoall_base(long long n, int base, t_bool capital)
 {
 	char	*res;
 	int		i;
@@ -102,7 +111,7 @@ char	*ft_itoall_base(long long n, int base, t_bool capital)
 			ft_nb_digit(n) + 1)) == NULL)
 			return (NULL);
 	}
-	ft_itoa_rec(res, n, &i, base, capital);
+	ft_itoa_rec(res, n, &i, capital ? base : -base);
 	res[i] = '\0';
 	return (res);
 }

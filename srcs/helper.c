@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/06 19:35:21 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/19 16:00:56 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 15:47:22 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,5 +66,3 @@ void	customput(char *final)
 		i++;
 	}
 }
-
-//t_bool	is_positive_int()

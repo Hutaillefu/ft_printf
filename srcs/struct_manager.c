@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/07 14:39:28 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/19 15:54:37 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 15:55:10 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,4 +70,24 @@ void			free_format(t_format **format)
 		ft_memdel((void **)&((*format)->modifier));
 		ft_memdel((void **)format);
 	}
+}
+
+/*
+ ** Create a new fresh format based on str information. Resize str.
+ ** Return the format or NUll if error.
+*/
+
+t_format		*extract(char **str)
+{
+	t_format *format;
+
+	if (!(format = new_format()))
+		return (NULL);
+	check_flags(str, &format);
+	check_width(str, &((format)->min_width));
+	check_period(str, &format);
+	check_width(str, &((format)->precision));
+	check_modifier(str, &format);
+	check_type(str, &format);
+	return (format);
 }

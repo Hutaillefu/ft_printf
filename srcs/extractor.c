@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/07 14:55:36 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/19 13:58:24 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 15:52:29 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@
  ** Resize the string pointed by str if flag(s) found.
 */
 
-static void	check_flags(char **str, t_format **format)
+void	check_flags(char **str, t_format **format)
 {
 	t_bool flag_found;
 
@@ -49,7 +49,7 @@ static void	check_flags(char **str, t_format **format)
  ** Resize the string pointed by str if a number was found.
 */
 
-static void	check_width(char **str, size_t *val)
+void	check_width(char **str, size_t *val)
 {
 	int		i;
 	char	*res;
@@ -82,7 +82,7 @@ static void	check_width(char **str, size_t *val)
  ** Resize the string pointed by str if a modifier was found.
 */
 
-static void	check_modifier(char **str, t_format **format)
+void	check_modifier(char **str, t_format **format)
 {
 	if (!(*str))
 		return ;
@@ -107,7 +107,7 @@ static void	check_modifier(char **str, t_format **format)
  ** Resize the string pointed by str if a period was found.
 */
 
-static void	check_period(char **str, t_format **format)
+void	check_period(char **str, t_format **format)
 {
 	if (!(*str))
 		return ;
@@ -123,7 +123,7 @@ static void	check_period(char **str, t_format **format)
  ** Resize the string pointed by str if a type was found.
 */
 
-static void	check_type(char **str, t_format **format)
+void	check_type(char **str, t_format **format)
 {
 	if (!(*str))
 		return ;
@@ -141,24 +141,4 @@ static void	check_type(char **str, t_format **format)
 		(*format)->type = **str;
 		(*str)++;
 	}
-}
-
-/*
- ** Create a new fresh format based on str information. Resize str.
- ** Return the format or NUll if error.
-*/
-
-t_format	*extract(char **str)
-{
-	t_format *format;
-
-	if (!(format = new_format()))
-		return (NULL);
-	check_flags(str, &format);
-	check_width(str, &((format)->min_width));
-	check_period(str, &format);
-	check_width(str, &((format)->precision));
-	check_modifier(str, &format);
-	check_type(str, &format);
-	return (format);
 }

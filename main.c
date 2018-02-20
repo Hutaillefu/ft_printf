@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/05 16:12:50 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/19 19:04:36 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 15:50:01 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,10 +32,15 @@ int main(int argc, char **argv)
 	// printf("%d chars printed\n", len1);
 
 
-	int len = ft_printf("%C\n", 0xbffe);
+	int len = ft_printf("%x\n", 42);
+	printf("%d chars printed\n", len);
+	int len1 = printf("%x\n", 42);
+	printf("%d chars printed\n", len1);
+
+	/*int len = ft_printf("%C\n", 0xbffe);
 	printf("%d chars printed\n", len);
 	int len1 = printf("%C\n", 0xbffe);
-	printf("%d chars printed\n", len1);
+	printf("%d chars printed\n", len1);*/
 
 	/*int len2 = ft_printf("%0#10.0x %0#x\n", 12345, 0);
 	printf("%d chars printed\n", len2);

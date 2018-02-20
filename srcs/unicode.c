@@ -6,7 +6,7 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/06 19:35:21 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/19 19:09:21 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 14:17:14 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,10 +33,10 @@ static void	process_four_bytes(wchar_t wchar, char *res)
 	res[0] = ((wchar >> 18) & 0x3F) + 240;
 	if (wchar >= 0x10000 && wchar <= 0x1FFFF)
 		res[1] = ((wchar >> 12) & 0x3F) + 144;
-	else if  (wchar >= 0x20000 && wchar <= 0x3FFFF)
+	else if (wchar >= 0x20000 && wchar <= 0x3FFFF)
 		res[1] = ((wchar >> 12) & 0x3F) + 160;
-	else 
-		res[1] = ((wchar >> 12) & 0x3F) + 128;	
+	else
+		res[1] = ((wchar >> 12) & 0x3F) + 128;
 	res[2] = ((wchar >> 6) & 0x3F) + 128;
 	res[3] = (wchar & 0x3F) + 128;
 }

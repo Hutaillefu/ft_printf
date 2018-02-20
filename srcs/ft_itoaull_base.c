@@ -6,14 +6,14 @@
 /*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/30 13:59:57 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/31 14:42:25 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/20 15:17:34 by htaillef    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int ft_nb_digit(unsigned long long n)
+static int	ft_nb_digit(unsigned long long n)
 {
 	int i;
 
@@ -26,7 +26,7 @@ static int ft_nb_digit(unsigned long long n)
 	return (i);
 }
 
-static char ft_upper_char(int n)
+static char	ft_upper_char(int n)
 {
 	if (n == 10)
 		return ('A');
@@ -44,7 +44,7 @@ static char ft_upper_char(int n)
 		return (n + '0');
 }
 
-static char ft_lower_char(int n)
+static char	ft_lower_char(int n)
 {
 	if (n == 10)
 		return ('a');
@@ -62,9 +62,21 @@ static char ft_lower_char(int n)
 		return (n + '0');
 }
 
-static void ft_itoa_rec(char *res, unsigned long long n, int *i, unsigned long long base, t_bool capital)
+static void	ft_itoa_rec(char *res, unsigned long long n, int *i,
+	long long base)
 {
-	if (n < base)
+	unsigned long long	nbase;
+	t_bool				capital;
+
+	if (base > 0)
+		capital = TRUE;
+	else
+	{
+		capital = FALSE;
+		base = -base;
+	}
+	nbase = base;
+	if (n < nbase)
 	{
 		if (capital == TRUE)
 			res[*i] = ft_upper_char(n);
@@ -74,23 +86,23 @@ static void ft_itoa_rec(char *res, unsigned long long n, int *i, unsigned long l
 	}
 	else
 	{
-		ft_itoa_rec(res, n / base, i, base, capital);
-		ft_itoa_rec(res, n % base, i, base, capital);
+		ft_itoa_rec(res, n / nbase, i, capital ? base : -base);
+		ft_itoa_rec(res, n % nbase, i, capital ? base : -base);
 	}
 }
 
-char *ft_itoaull_base(unsigned long long n, unsigned long long base, t_bool capital)
+char		*ft_itoaull_base(unsigned long long n, long long base,
+	t_bool capital)
 {
-	char *res;
-	int i;
+	char	*res;
+	int		i;
 
 	if (base > 16)
 		return (NULL);
 	i = 0;
-
 	if ((res = (char *)ft_memalloc(sizeof(char) * ft_nb_digit(n) + 1)) == NULL)
 		return (NULL);
-	ft_itoa_rec(res, n, &i, base, capital);
+	ft_itoa_rec(res, n, &i, capital ? base : -base);
 	res[i] = '\0';
 	return (res);
 }
